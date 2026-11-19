@@ -1,0 +1,23 @@
+# dependencies and build output (GitHub Actions rebuilds these)
+node_modules/
+dist/
+dist-ssr/
+
+# logs and local env
+*.log
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+# editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# design source files, kept on your PC but not needed to build the site
+brand/
+
+# the staged copy of the workflow (the live one is .github/workflows/deploy.yml)
+github-pages-deploy.yml
