@@ -1550,219 +1550,261 @@ dd {
     linear-gradient(#d3efd3, #d3efd3) left center / calc(100% - 0.4rem) 2px no-repeat;
 }
 
-/* ---------------------- use-case graph (dark band) ---------------------- */
-.uc-graph-band {
-  padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.25rem, 4vw, 3.5rem);
-  background: var(--forest);
-  color: #eaf1e4;
-}
-.uc-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem 1.5rem;
-  margin-bottom: 1.25rem;
-}
-.uc-toolbar .search {
-  flex: 1 1 18rem;
-  max-width: 26rem;
-}
-.uc-graph-band .search input {
-  background: var(--forest-2);
-  border-color: rgba(255, 255, 255, 0.28);
-  color: #fff;
-}
-.uc-graph-band .search input::placeholder {
-  color: #9db5a4;
-}
-.uc-graph-band .search input:focus {
-  border-color: #6fbf6f;
-}
-.uc-toolbar .result-count {
-  margin: 0;
-  color: #a6dba6;
-}
-.link-btn-light {
-  color: #d3efd3;
-}
-.ug-wrap {
-  overflow: hidden;
-}
-.ug {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.ug-hint {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  color: #aec2b4;
-}
-.ug-head {
-  font: 500 11px/1 var(--f-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  fill: #a6dba6;
-}
-.ge {
-  fill: none;
-  stroke: rgba(166, 219, 166, 0.1);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke 0.2s, opacity 0.2s;
-}
-.ge.on {
-  stroke: rgba(166, 219, 166, 0.34);
-}
-.ge.sel {
-  stroke: #8fd68f;
-}
-.ge.hot {
-  stroke: #e9ffe9;
-  stroke-dasharray: 6 5;
-  animation: trace-flow 0.9s linear infinite;
-}
-@keyframes trace-flow {
-  to {
-    stroke-dashoffset: -22;
-  }
-}
-.gn {
-  cursor: pointer;
-  outline: none;
-}
-.gn-hit {
-  fill: transparent;
-}
-.gn-dot {
-  fill: var(--forest);
-  stroke: #a6dba6;
-  stroke-width: 2;
-  transition: fill 0.15s, stroke 0.15s;
-}
-.gn-ring {
-  fill: none;
-  stroke: #e9ffe9;
-  stroke-width: 1.5;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.gn-text {
-  font: 500 13.5px/1 var(--f-body);
-  fill: #dbe8dd;
-  transition: fill 0.15s;
-}
-.gn-count {
-  font: 500 10.5px var(--f-mono);
-  fill: #7fa088;
-}
-.gn-pill {
-  fill: var(--forest-2);
-  stroke: rgba(166, 219, 166, 0.5);
-  stroke-width: 1.5;
-  transition: fill 0.15s, stroke 0.15s;
-}
-.gn-ai .gn-text {
-  font-weight: 600;
-  fill: #eaf6ec;
-}
-.gn.is-hover .gn-dot,
-.gn.is-sel .gn-dot {
-  fill: #a6dba6;
-  stroke: #e9ffe9;
-}
-.gn.is-sel .gn-ring,
-.gn:focus-visible .gn-ring {
-  opacity: 1;
-}
-.gn.is-hover .gn-text,
-.gn.is-sel .gn-text {
-  fill: #fff;
-}
-.gn.is-hover .gn-pill {
-  stroke: #e9ffe9;
-}
-.gn.is-sel .gn-pill {
-  fill: #1e7a1e;
-  stroke: #e9ffe9;
-}
-.gn:focus-visible .gn-pill {
-  stroke: #fff;
-  stroke-width: 2.5;
-}
-.gn.is-dim {
-  opacity: 0.38;
-}
-
-/* graph on wide screens, checkbox list on small ones */
-@media (min-width: 1001px) {
-  .uc-graph-band .filters {
-    display: none;
-  }
-}
-@media (max-width: 1000px) {
-  .ug-wrap,
-  .ug-hint {
-    display: none;
-  }
-  .uc-graph-band .filters-toggle {
-    background: var(--forest-2);
-    border-color: rgba(255, 255, 255, 0.35);
-    color: #fff;
-  }
-  .uc-graph-band .fgroup legend {
-    border-color: rgba(255, 255, 255, 0.18);
-    color: #a6dba6;
-  }
-  .uc-graph-band .fopt-count {
-    color: #a6dba6;
-  }
-  .uc-graph-band .fopt input {
-    background: var(--forest-2);
-    border-color: #a6dba6;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ge.hot {
-    animation: none;
-    stroke-dasharray: none;
-  }
-}
-
-/* hero ledger: three nodes joined by one trace instead of a ruled table */
-.ledger {
+/* ------------------------------------------------------------------
+   Closing sections: no coloured belt. Oversized email on paper, a trace
+   running into it.
+------------------------------------------------------------------- */
+.cta {
   position: relative;
-  border-top: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: clamp(4rem, 9vw, 7rem) 0;
 }
-.ledger::before {
+.cta::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--green), var(--green) 70%, transparent);
+  left: var(--gutter);
+  width: 2px;
+  height: clamp(2.5rem, 5vw, 4rem);
+  background: var(--green);
 }
-.ledger li {
-  position: relative;
-  border-right: 0;
-  padding-top: 1.6rem;
-}
-.ledger li::before {
+.cta::after {
   content: '';
   position: absolute;
-  top: -5px;
-  left: 0;
+  top: clamp(2.5rem, 5vw, 4rem);
+  left: var(--gutter);
   width: 12px;
   height: 12px;
+  margin: -1px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2.5px solid var(--green);
+}
+.cta-text {
+  color: var(--ink-2);
+}
+.cta .eyebrow-light {
+  color: var(--green-text);
+}
+.cta .eyebrow-light::before {
+  background:
+    radial-gradient(circle at calc(100% - 0.25rem) 50%, var(--green) 0 0.25rem, transparent 0.27rem),
+    linear-gradient(var(--green), var(--green)) left center / calc(100% - 0.4rem) 2px no-repeat;
+}
+.cta-mail {
+  color: var(--ink);
+  font-size: clamp(1.6rem, 6.2vw, 5.2rem);
+  letter-spacing: -0.03em;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 4px;
+  overflow-wrap: anywhere;
+}
+.cta .btn-light {
+  background: var(--green-btn);
+  color: #fff;
+}
+.cta .btn-light:hover {
+  background: var(--green-btn-hover);
+}
+.cta .btn-outline-light {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.cta .btn-outline-light:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Home use-case section: paper, not a dark belt */
+.band {
+  background: transparent;
+  color: var(--ink);
+}
+.band .h2 {
+  color: var(--ink);
+}
+.band-note {
+  color: var(--ink-2);
+}
+.band .eyebrow-light {
+  color: var(--green-text);
+}
+.band .eyebrow-light::before {
+  background:
+    radial-gradient(circle at calc(100% - 0.25rem) 50%, var(--green) 0 0.25rem, transparent 0.27rem),
+    linear-gradient(var(--green), var(--green)) left center / calc(100% - 0.4rem) 2px no-repeat;
+}
+.band .uc-card-dark {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.band .uc-card-dark:hover {
+  border-color: var(--green);
+}
+.band .uc-card-dark .tag-line {
+  color: var(--green-text);
+}
+.band .uc-card-dark .uc-summary {
+  color: var(--ink-2);
+}
+.band .uc-card-dark .uc-foot {
+  border-color: var(--line);
+  color: var(--muted);
+}
+.band .btn-outline-light,
+.band .link-btn-light {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.band .btn-light {
+  background: var(--green-btn);
+  color: #fff;
+}
+.band .btn-light:hover {
+  background: var(--green-btn-hover);
+}
+
+/* Header: same bar as before, but the active link is a circuit trace ending in a node */
+.nav-underline {
+  left: 0;
+  right: auto;
+  bottom: -9px;
+  width: 100%;
+  height: 2px;
+  background: var(--green);
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
   background: var(--paper);
   border: 2px solid var(--green);
-  border-radius: 50%;
 }
-.ledger li:not(:first-child)::before {
-  left: 1.5rem;
+@media (max-width: 860px) {
+  .nav-underline {
+    bottom: -8px;
+  }
 }
-@media (max-width: 640px) {
-  .ledger::before { display: none; }
-  .ledger li::before { display: none; }
+
+/* ------------------------------------------------------------------
+   Orange is an interaction colour. One hover language everywhere:
+   bordered or filled things lift and cast a hard orange shadow;
+   plain text links get an orange underline. At rest there is no orange.
+------------------------------------------------------------------- */
+:root {
+  --signal: #ff5b1f;
+  --lift: 4px 4px 0 var(--signal);
+}
+:focus-visible {
+  outline-color: var(--signal);
+}
+input[type='checkbox'] {
+  accent-color: var(--signal);
+}
+.btn,
+.nav-toggle,
+.row-link,
+.chips-links li {
+  transition:
+    transform 0.16s,
+    box-shadow 0.16s,
+    background 0.18s,
+    color 0.18s,
+    border-color 0.18s;
+}
+.btn:hover,
+.nav-toggle:hover,
+.row-link:hover,
+.chips-links li:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--lift);
+}
+.btn:active,
+.nav-toggle:active,
+.row-link:active,
+.chips-links li:active {
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 var(--signal);
+}
+.uc-card,
+.tech-card {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.uc-card:hover,
+.tech-card:hover,
+.band .uc-card-dark:hover {
+  border-color: var(--ink);
+  box-shadow: 5px 5px 0 var(--signal);
+}
+.chips-links li:hover {
+  border-color: var(--ink);
+}
+.nav-link:hover,
+.footer-col a:hover,
+.crumbs a:hover,
+.svc-uc-list a:hover,
+.chip-link:hover,
+.text-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.nav-link:hover {
+  color: var(--ink);
+}
+.nav-link[aria-current='page']:hover {
+  text-decoration: none;
+}
+.footer-col a:hover {
+  color: #fff;
+}
+
+/* Closing sections: an ink panel inside the page, not a full-width belt */
+.cta::before,
+.cta::after {
+  display: none;
+}
+.cta {
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+}
+.cta .cta-inner {
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--ink);
+  color: #fff;
+  border-top: 8px solid var(--green);
+  border-radius: var(--radius);
+}
+.cta .cta-title {
+  color: #fff;
+}
+.cta .cta-text {
+  color: #c9d8cd;
+}
+.cta .eyebrow-light {
+  color: var(--mint);
+}
+.cta .cta-mail {
+  color: #fff;
+  text-decoration-color: var(--green);
+}
+.cta .cta-mail:hover {
+  text-decoration-color: var(--signal);
+}
+.cta .btn-light {
+  background: var(--green-btn);
+  color: #fff;
+}
+.cta .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.cta .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
