@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react';
 import UseCaseCard from '../components/UseCaseCard';
+import UseCaseGraph, { type GroupKey, type Selection } from '../components/UseCaseGraph';
 import {
   AI_TYPES,
   FUNCTIONS,
@@ -9,9 +10,6 @@ import {
   type UseCase,
 } from '../data/useCases';
 import { EASE, Reveal } from '../components/motion';
-
-type GroupKey = 'industry' | 'fn' | 'ai';
-type Selection = Record<GroupKey, string[]>;
 
 const EMPTY: Selection = { industry: [], fn: [], ai: [] };
 
@@ -99,8 +97,30 @@ export default function UseCases() {
         </div>
       </section>
 
-      <section className="section-tight">
-        <div className="container uc-layout">
+      <section className="uc-graph-band">
+        <div className="container">
+          <div className="uc-toolbar">
+            <label className="search">
+              <span className="sr-only">Search use cases</span>
+              <input
+                type="search"
+                placeholder="Search use cases"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </label>
+            <p className="result-count" role="status" aria-live="polite">
+              {visible.length} of {useCases.length} use cases
+            </p>
+            <button type="button" className="link-btn link-btn-light" onClick={clear} disabled={!activeCount && !q}>
+              Clear
+            </button>
+          </div>
+          <div className="ug-wrap">
+            <UseCaseGraph sel={sel} visible={visible} all={useCases} onToggle={toggle} />
+          </div>
+          <p className="ug-hint">Select an industry, a type of AI or a function. The traces show which use cases connect them.</p>
+
           <aside className={`filters${panelOpen ? ' is-open' : ''}`} aria-label="Filter use cases">
             <button
               type="button"
@@ -112,15 +132,6 @@ export default function UseCases() {
               Filters{activeCount ? ` (${activeCount})` : ''}
             </button>
             <div id="filter-panel" className="filters-panel">
-              <label className="search">
-                <span className="sr-only">Search use cases</span>
-                <input
-                  type="search"
-                  placeholder="Search use cases"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-              </label>
               {GROUPS.map((g) => (
                 <fieldset key={g.key} className="fgroup">
                   <legend>{g.label}</legend>
@@ -133,32 +144,22 @@ export default function UseCases() {
                       <label key={o} className={`fopt${count === 0 && !checked ? ' is-empty' : ''}`}>
                         <input type="checkbox" checked={checked} onChange={() => toggle(g.key, o)} />
                         <span className="fopt-label">{o}</span>
-                        <motion.span
-                          key={count}
-                          className="fopt-count"
-                          initial={{ opacity: 0.3, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.25 }}
-                        >
-                          {count}
-                        </motion.span>
+                        <span className="fopt-count">{count}</span>
                       </label>
                     );
                   })}
                 </fieldset>
               ))}
-              <button type="button" className="link-btn" onClick={clear} disabled={!activeCount && !q}>
-                Clear all filters
-              </button>
             </div>
           </aside>
+        </div>
+      </section>
 
+      <section className="section-tight">
+        <div className="container">
           <div className="uc-results">
-            <p className="result-count" role="status" aria-live="polite">
-              Showing {visible.length} of {useCases.length} use cases
-            </p>
             <LayoutGroup>
-              <motion.div className="uc-grid" layout>
+              <motion.div className="uc-grid uc-grid-3" layout>
                 <AnimatePresence initial={false} mode="popLayout">
                   {visible.map((u) => (
                     <UseCaseCard key={u.slug} u={u} animateLayout />

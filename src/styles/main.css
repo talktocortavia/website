@@ -1528,3 +1528,241 @@ dd {
     gap: 1.1rem;
   }
 }
+
+/* ------------------------------------------------------------------
+   Circuit language: the mark's traces, used as the site's graphic idiom
+------------------------------------------------------------------- */
+.eyebrow::before {
+  width: 1.6rem;
+  height: 0.5rem;
+  background:
+    radial-gradient(circle at calc(100% - 0.25rem) 50%, var(--green) 0 0.25rem, transparent 0.27rem),
+    linear-gradient(var(--green), var(--green)) left center / calc(100% - 0.4rem) 2px no-repeat;
+}
+.eyebrow-light::before {
+  background:
+    radial-gradient(circle at calc(100% - 0.25rem) 50%, #6fbf6f 0 0.25rem, transparent 0.27rem),
+    linear-gradient(#6fbf6f, #6fbf6f) left center / calc(100% - 0.4rem) 2px no-repeat;
+}
+.cta .eyebrow-light::before {
+  background:
+    radial-gradient(circle at calc(100% - 0.25rem) 50%, #d3efd3 0 0.25rem, transparent 0.27rem),
+    linear-gradient(#d3efd3, #d3efd3) left center / calc(100% - 0.4rem) 2px no-repeat;
+}
+
+/* ---------------------- use-case graph (dark band) ---------------------- */
+.uc-graph-band {
+  padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.25rem, 4vw, 3.5rem);
+  background: var(--forest);
+  color: #eaf1e4;
+}
+.uc-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.uc-toolbar .search {
+  flex: 1 1 18rem;
+  max-width: 26rem;
+}
+.uc-graph-band .search input {
+  background: var(--forest-2);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+.uc-graph-band .search input::placeholder {
+  color: #9db5a4;
+}
+.uc-graph-band .search input:focus {
+  border-color: #6fbf6f;
+}
+.uc-toolbar .result-count {
+  margin: 0;
+  color: #a6dba6;
+}
+.link-btn-light {
+  color: #d3efd3;
+}
+.ug-wrap {
+  overflow: hidden;
+}
+.ug {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ug-hint {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #aec2b4;
+}
+.ug-head {
+  font: 500 11px/1 var(--f-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: #a6dba6;
+}
+.ge {
+  fill: none;
+  stroke: rgba(166, 219, 166, 0.1);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s, opacity 0.2s;
+}
+.ge.on {
+  stroke: rgba(166, 219, 166, 0.34);
+}
+.ge.sel {
+  stroke: #8fd68f;
+}
+.ge.hot {
+  stroke: #e9ffe9;
+  stroke-dasharray: 6 5;
+  animation: trace-flow 0.9s linear infinite;
+}
+@keyframes trace-flow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+.gn {
+  cursor: pointer;
+  outline: none;
+}
+.gn-hit {
+  fill: transparent;
+}
+.gn-dot {
+  fill: var(--forest);
+  stroke: #a6dba6;
+  stroke-width: 2;
+  transition: fill 0.15s, stroke 0.15s;
+}
+.gn-ring {
+  fill: none;
+  stroke: #e9ffe9;
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.gn-text {
+  font: 500 13.5px/1 var(--f-body);
+  fill: #dbe8dd;
+  transition: fill 0.15s;
+}
+.gn-count {
+  font: 500 10.5px var(--f-mono);
+  fill: #7fa088;
+}
+.gn-pill {
+  fill: var(--forest-2);
+  stroke: rgba(166, 219, 166, 0.5);
+  stroke-width: 1.5;
+  transition: fill 0.15s, stroke 0.15s;
+}
+.gn-ai .gn-text {
+  font-weight: 600;
+  fill: #eaf6ec;
+}
+.gn.is-hover .gn-dot,
+.gn.is-sel .gn-dot {
+  fill: #a6dba6;
+  stroke: #e9ffe9;
+}
+.gn.is-sel .gn-ring,
+.gn:focus-visible .gn-ring {
+  opacity: 1;
+}
+.gn.is-hover .gn-text,
+.gn.is-sel .gn-text {
+  fill: #fff;
+}
+.gn.is-hover .gn-pill {
+  stroke: #e9ffe9;
+}
+.gn.is-sel .gn-pill {
+  fill: #1e7a1e;
+  stroke: #e9ffe9;
+}
+.gn:focus-visible .gn-pill {
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+.gn.is-dim {
+  opacity: 0.38;
+}
+
+/* graph on wide screens, checkbox list on small ones */
+@media (min-width: 1001px) {
+  .uc-graph-band .filters {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .ug-wrap,
+  .ug-hint {
+    display: none;
+  }
+  .uc-graph-band .filters-toggle {
+    background: var(--forest-2);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+  }
+  .uc-graph-band .fgroup legend {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #a6dba6;
+  }
+  .uc-graph-band .fopt-count {
+    color: #a6dba6;
+  }
+  .uc-graph-band .fopt input {
+    background: var(--forest-2);
+    border-color: #a6dba6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ge.hot {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
+/* hero ledger: three nodes joined by one trace instead of a ruled table */
+.ledger {
+  position: relative;
+  border-top: 0;
+}
+.ledger::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--green) 70%, transparent);
+}
+.ledger li {
+  position: relative;
+  border-right: 0;
+  padding-top: 1.6rem;
+}
+.ledger li::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--paper);
+  border: 2px solid var(--green);
+  border-radius: 50%;
+}
+.ledger li:not(:first-child)::before {
+  left: 1.5rem;
+}
+@media (max-width: 640px) {
+  .ledger::before { display: none; }
+  .ledger li::before { display: none; }
+}
