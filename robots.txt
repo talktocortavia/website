@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cortavia.in/sitemap.xml
